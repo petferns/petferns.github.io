@@ -1,0 +1,187 @@
+﻿<html>
+
+<!--
+
+    Note to Students:
+
+        This is a very short introduction to using Javascript in the browser.
+
+        To see this as a webpage, you have to start a *Local Web Server*. There are many ways to do this: since you all have python installed, we will use python.
+
+        - Open terminal
+
+        - 'cd' into the directory where this html file is (js_in_webpage.html)
+
+        - Type the following into the terminal and hit 'enter':
+
+            ### IN PYTHON 2 ###
+            python -m SimpleHTTPServer
+
+            ### IN PYTHON 3 ###
+            python -m http.server
+
+            your server should read something like: Serving HTTP on 0.0.0.0 port 8000 ...
+
+        - now go to any browser and type in the HTTP address and the filename: something like:
+
+            http://0.0.0.0:8000/js_in_webpage.html
+
+            or
+
+            http://localhost:8000/js_in_webpage.html
+
+        - Congrats: you now have a local HTTP server running. Now, every time you change this file and save it, when you reload the browser you will see your changes!
+-->
+
+<head>
+    <title>Intro to JS in a Browser</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.4/d3.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Intro to JS in a Browser</h1>
+    <h2>All of the below is created with Javascript. </h2>
+
+    <script type="text/javascript">
+
+// Here are some examples of things that you might want to do with Javascript
+
+// writing to a document directly
+
+//document.write('<p><b>While you are working in Javascript (or any language), it is really important to be able to debug. Some browsers offer very simple ways to see what is happening on a page.</b></p>');
+//document.write('<p>Chrome and Firefox in particular offer good Developer Tools and Javascript console access</p><br>');
+    </script>
+
+    <script type="text/javascript">
+
+// Find this bug in the console and fix it!
+
+//document.write('<p>These are really helpful for finding bugs!</p><br>');
+    </script>
+
+
+
+
+
+
+    <p>
+        <form>
+            <!--<input id="num" type="number" size="4">
+            <input type="button" value="check" onClick="calc();">-->
+        
+    </p>
+    <script>
+        document.write('========================================================================================== DATA 608 Assignment 5 ==========================================================================================')
+
+        document.write('<br><p>PART 1')
+
+        document.write('<br><p>1) Reverse Any String')
+        function reverseString(str) {
+            return str.split("").reverse().join("");
+        };
+        function calc() {
+            var t = document.getElementById("target");
+            t.innerHTML = reverseString(document.getElementById('str').value);
+        }
+    </script>
+    <p>
+        <input id="str" type="text">
+        <input type="button" value="Reverse" onClick="calc();">
+    </p>
+    <script>
+
+        document.write('<br><p>2) First 20 multiples')
+        function generateTable(n){
+            var array = [n,n*2,n*3,n*4,n*5,n*6,n*7,n*8,n*9,n*10,n*11,n*12,n*13,n*14,n*15,n*16,n*17,n*18,n*19,n*20];
+            var result = "<table border=1>";
+            result += "<tr>";
+            for (var j = 0; j < array.length; j++) {
+                result += "<td>" + array[j] + "</td>";
+                if ((j + 1) % 4 == 0) {
+                    result += "</tr><tr>";
+                }
+            }
+            result += "</tr>";
+            result += "</table>";
+            --> document.body.innerHTML = result;
+            return result;
+        }
+        function printTable(){
+            var t = document.getElementById("target");
+            t.innerHTML = generateTable(document.getElementById('n').value);
+        }
+    </script>
+    <p>
+        <input id="n" type="number">
+        <input type="button" value="20-Multiples" onClick="printTable();">
+    </p>
+
+    
+
+    <script type="text/javascript">
+        document.write('-----------------------------------------------------------------------------------------------------------------------------------------------')
+        document.write('<br><p>PART 2');
+
+        document.write('<br><p>CSV data in table');
+        function getdata() {
+            var result = "<table border=1>";
+            result += "<tr><td>Name</td><td>Height</td><td>Weight</td></tr>";
+            d3.csv("https://raw.githubusercontent.com/charleyferrari/CUNY_DATA_608/master/module5/data/presidents.csv", function (data) {
+                // result += "<tr>";
+                for (var i = 0; i < data.length; i++) {
+                    result += "<tr><td>" + data[i].Name + "</td><td>" + data[i].Height + "</td><td>" + data[i].Weight + "</td></tr>";
+                    console.log(data[i].Name);
+                    console.log(data[i].Height);
+                    console.log(data[i].Weight);
+                }
+                //result += "</tr>";
+                result += "</table>";
+                -->  document.body.innerHTML = result;
+
+                var t1 = document.getElementById("target2");
+                t1.innerHTML = result;
+
+            });
+        }
+    </script>
+    <script>
+        function searchPresident()
+        {
+            var result = "<table border=1>";
+            result += "<tr><td>Name</td><td>Height</td><td>Weight</td></tr>";
+            d3.csv("https://raw.githubusercontent.com/charleyferrari/CUNY_DATA_608/master/module5/data/presidents.csv", function (data) {
+                // result += "<tr>";
+                for (var i = 0; i < data.length; i++) {
+                    if(document.getElementById("pname").value.toUpperCase() == data[i].Name.toUpperCase() )
+                     result += "<tr><td>" + data[i].Name + "</td><td>" + data[i].Height + "</td><td>" + data[i].Weight + "</td></tr>";
+                   
+                }
+                //result += "</tr>";
+                result += "</table>";
+                -->  document.body.innerHTML = result;
+
+                var t1 = document.getElementById("target2");
+                t1.innerHTML = result;
+
+            });
+        }
+    </script>
+    <p>
+        
+
+
+        <input type="button" value="Click here to Read csv file and load into table" onClick="getdata();">
+       <input type="text" placeholder="Search by President's name" id="pname"/>
+        <input type="button" value="Search president" onclick="searchPresident()" />
+
+    </p>
+    </form>
+    <div>Answers are below :</div>
+    <div id="target"></div>
+
+    <div id="target2"></div>
+
+
+</body>
+</html>
